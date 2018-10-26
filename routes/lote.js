@@ -54,7 +54,9 @@ app.get('/:guardarLote/:NomLote/:NomCultivo/:VarCul/:FechaSiembra', (req, res) =
         NomLote: NomLote,
         NomCultivo: NomCultivo,
         VarCul: VarCul,
-        FechaSiembra: FechaSiembra
+        FechaSiembra: FechaSiembra,
+        Hist_NDWI: 0,
+        Hist_NDVI: 0,
     });
 
     lote.save((err, LoteGuardado) => {
