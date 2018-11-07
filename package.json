@@ -4,7 +4,7 @@
     "description": "BackEnd Server de NSmartAgro",
     "main": "index.js",
     "scripts": {
-        "start": "nodemon app.js",
+        "start": "node app.js",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "author": "ISC Manuel Alfredo Flores Roslaes",
