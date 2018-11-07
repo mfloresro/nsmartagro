@@ -9,6 +9,7 @@ var app = express();
 var appRoutes = require('./routes/app');
 var loteRoutes = require('./routes/lote');
 var guardarHistorial = require('./routes/guardarHistorial');
+var mostrarHistorial = require('./routes/mostrarHistorial');
 
 // Conexión a la base de datos
 mongoose.connection.openUri('mongodb://mflores:itsg1982@ds141623.mlab.com:41623/nsmartagrodb', { useNewUrlParser: true }, (err, res) => {
@@ -20,6 +21,8 @@ mongoose.connection.openUri('mongodb://mflores:itsg1982@ds141623.mlab.com:41623/
 // Rutas
 app.use('/lote', loteRoutes);
 app.use('/guardarHistorial', guardarHistorial);
+app.use('/mostrarHistorial', mostrarHistorial);
+
 
 app.use('/', appRoutes);
 
