@@ -60,7 +60,7 @@ app.get('/:lote/:indice', (req, res) => {
                 case 'HistConductividad':
                     arr = lotes.HistConductividad;
                     if (arr.length - 1 < 10) {
-                        lotes.HistConductividad = arr;
+                        y = lotes.HistConductividad;
                     } else {
                         x = arr[(arr.length - 1) - 10]
                         for (var i = x; i < arr.length; i += 1) {
@@ -73,7 +73,7 @@ app.get('/:lote/:indice', (req, res) => {
                 case 'HistTemperatura':
                     arr = lotes.HistTemperatura;
                     if (arr.length - 1 < 10) {
-                        lotes.HistTemperatura = arr;
+                        y = lotes.HistTemperatura = arr;
                     } else {
                         x = arr[(arr.length - 1) - 10]
                         for (var i = x; i < arr.length; i += 1) {
@@ -86,7 +86,7 @@ app.get('/:lote/:indice', (req, res) => {
                 case 'HistHumedad':
                     arr = lotes.HistHumedad;
                     if (arr.length - 1 < 10) {
-                        lotes.HistHumedad = arr;
+                        y = lotes.HistHumedad = arr;
                     } else {
                         x = arr[(arr.length - 1) - 10]
                         for (var i = x; i < arr.length; i += 1) {
@@ -99,7 +99,7 @@ app.get('/:lote/:indice', (req, res) => {
                 case 'HistDispNutrientes':
                     arr = lotes.HistDispNutrientes;
                     if (arr.length - 1 < 10) {
-                        lotes.HistDispNutrientes = arr;
+                        y = lotes.HistDispNutrientes = arr;
                     } else {
                         x = arr[(arr.length - 1) - 10]
                         for (var i = x; i < arr.length; i += 1) {
