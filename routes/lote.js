@@ -77,34 +77,34 @@ app.get('/:guardarLote/:NomLote/:NomCultivo/:VarCul/:FechaSiembra', (req, res) =
 
 });
 
-
 app.get('/:lote/:indices', (req, res) => {
     var lote = req.params.lote;
     var indice = req.params.indice;
 
 
-    Lote.find({ '_id': lote }, 'Hist_NDVI Hist_NDWI HistConductividad HistTemperatura HistHumedad HistDispNutrientes')
-        .exec((err, lotes) => {
-            if (err) {
-                return res.status(500).json({
-                    ok: false,
-                    mensaje: 'Error al buscar índice: ' + indice,
-                    errors: err
-                });
-            }
+    Lote.find({ '_id': lote }, 'Hist_NDVI')
 
-            if (!lotes) {
-                return res.status(400).json({
-                    ok: false,
-                    mensaje: 'El lote con el id ' + id + ' no existe',
-                    errors: { message: 'No existe un lote con ese ID' }
-                });
-            }
-
-            return res.status(200).json({
-                lotes: lotes
+    .exec((err, lotes) => {
+        if (err) {
+            return res.status(500).json({
+                ok: false,
+                mensaje: 'Error al buscar índice: ' + indice,
+                errors: err
             });
+        }
+
+        if (!lotes) {
+            return res.status(400).json({
+                ok: false,
+                mensaje: 'El lote con el id ' + id + ' no existe',
+                errors: { message: 'No existe un lote con ese ID' }
+            });
+        }
+        console.log('lotes --> ', lotes);
+        return res.status(200).json({
+            lotes: lotes
         });
+    });
 });
 
 //=====================================================================================
