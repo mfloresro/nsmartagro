@@ -14,27 +14,8 @@ app.get('/', (req, res, next) => {
 // Agregar valor índice
 //=====================================================================================
 
-app.get('/:lote/:indice', (req, res) => {
+app.get('/:lote', (req, res) => {
     var lote = req.params.lote;
-    var indice = req.params.indice;
-
-    var inidiceValidos = ['HistConductividad', 'HistTemperatura', 'HistHumedad', 'HistDispNutrientes'];
-
-    if (inidiceValidos.indexOf(indice) < 0) {
-        return res.status(400).json({
-            ok: false,
-            mensaje: 'Índice no válido',
-            errors: { message: 'Los índices válidos son ' + inidiceValidos.join(', ') }
-        });
-    }
-
-    if (inidiceValidos.indexOf(indice) < 0) {
-        return res.status(400).json({
-            ok: false,
-            mensaje: 'Índice no válido',
-            errors: { message: 'Los índices válidos son ' + inidiceValidos.join(', ') }
-        });
-    }
 
     Lote.findById({ '_id': lote })
         .exec((err, lotes) => {
@@ -56,65 +37,84 @@ app.get('/:lote/:indice', (req, res) => {
             var arr = [];
             var y = [];
 
-            switch (indice) {
-                case 'HistConductividad':
-                    arr = lotes.HistConductividad;
-                    if (arr.length - 1 < 10) {
-                        y = lotes.HistConductividad;
-                    } else {
-                        x = arr[(arr.length - 1) - 10]
-                        for (var i = x; i < arr.length; i += 1) {
-                            y.push(arr[i]);
-                        }
-                        lotes.HistConductividad = y;
-                    }
-                    break;
-
-                case 'HistTemperatura':
-                    arr = lotes.HistTemperatura;
-                    if (arr.length - 1 < 10) {
-                        y = lotes.HistTemperatura = arr;
-                    } else {
-                        x = arr[(arr.length - 1) - 10]
-                        for (var i = x; i < arr.length; i += 1) {
-                            y.push(arr[i]);
-                        }
-                        lotes.HistTemperatura = y;
-                    }
-                    break;
-
-                case 'HistHumedad':
-                    arr = lotes.HistHumedad;
-                    if (arr.length - 1 < 10) {
-                        y = lotes.HistHumedad = arr;
-                    } else {
-                        x = arr[(arr.length - 1) - 10]
-                        for (var i = x; i < arr.length; i += 1) {
-                            y.push(arr[i]);
-                        }
-                        lotes.HistHumedad = y;
-                    }
-                    break;
-
-                case 'HistDispNutrientes':
-                    arr = lotes.HistDispNutrientes;
-                    if (arr.length - 1 < 10) {
-                        y = lotes.HistDispNutrientes = arr;
-                    } else {
-                        x = arr[(arr.length - 1) - 10]
-                        for (var i = x; i < arr.length; i += 1) {
-                            y.push(arr[i]);
-                        }
-                        lotes.HistDispNutrientes = y;
-                    }
-                    break;
-                default:
-                    break;
+            arr = lotes.HistConductividad;
+            //console.log(arr);
+            if (arr.length < 10) {
+                y = lotes.HistConductividad;
+            } else {
+                x = (arr.length) - 10;
+                console.log('x', x);
+                for (var i = x; i < x + 10; i += 1) {
+                    y.push(arr[i]);
+                }
             }
+            lotes.HistConductividad = y;
+            // arr = [];
+            y = [];
+            arr = lotes.HistTemperatura;
+            if (arr.length < 10) {
+                y = lotes.HistTemperatura = arr;
+            } else {
+                x = (arr.length) - 10;
+                for (var i = x; i < x + 10; i += 1) {
+                    y.push(arr[i]);
+                }
+            }
+            lotes.HistTemperatura = y;
 
+            y = [];
+            arr = lotes.HistHumedad;
+            if (arr.length < 10) {
+                y = lotes.HistHumedad = arr;
+            } else {
+                x = (arr.length) - 10;
+                for (var i = x; i < x + 10; i += 1) {
+                    y.push(arr[i]);
+                }
+            }
+            lotes.HistHumedad = y;
+
+            y = [];
+            arr = lotes.HistDispNutrientes;
+            if (arr.length < 10) {
+                y = lotes.HistDispNutrientes = arr;
+            } else {
+                x = (arr.length) - 10;
+                for (var i = x; i < arr.length; i += 1) {
+                    y.push(arr[i]);
+                }
+            }
+            lotes.HistDispNutrientes = y;
+
+
+            var y = [];
+            arr = lotes.Hist_NDVI;
+            if (arr.length < 10) {
+                y = lotes.Hist_NDVI;
+            } else {
+                x = (arr.length) - 10;
+                console.log('x', x);
+                for (var i = x; i < x + 10; i += 1) {
+                    y.push(arr[i]);
+                }
+            }
+            lotes.Hist_NDVI = y;
+
+            var y = [];
+            arr = lotes.Hist_NDWI;
+            if (arr.length < 10) {
+                y = lotes.Hist_NDVI;
+            } else {
+                x = (arr.length) - 10;
+                console.log('x', x);
+                for (var i = x; i < x + 10; i += 1) {
+                    y.push(arr[i]);
+                }
+            }
+            lotes.Hist_NDWI = y;
 
             res.status(200).json({
-                lotes: y
+                lotes
             });
 
 
